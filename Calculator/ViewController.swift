@@ -12,6 +12,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var display: UILabel!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        brain.addUnaryOperation(named: "✅") { [weak self] in
+            self?.display.textColor = UIColor.green
+            return sqrt($0)
+        }
+    }
+    
     var userIsInTheMiddleOfTyping = false
     
     @IBAction func touchDigit(_ sender: UIButton) {
