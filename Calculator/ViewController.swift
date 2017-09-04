@@ -22,13 +22,30 @@ class ViewController: UIViewController {
     
     var userIsInTheMiddleOfTyping = false
     
+    // to deal with floating point input.
+    private let floatingPoint = "."
+    private var isFloatingPointInDisplay: Bool {
+        get {
+            return display.text!.contains(floatingPoint)
+        }
+    }
+    
     @IBAction func touchDigit(_ sender: UIButton) {
         let digit = sender.currentTitle!
+
         if userIsInTheMiddleOfTyping {
-            let textCurrentlyInDisplay = display.text!
-            display.text = textCurrentlyInDisplay + digit
+            if digit == floatingPoint && isFloatingPointInDisplay {
+                // ignore input
+            } else {
+                let textCurrentlyInDisplay = display.text!
+                display.text = textCurrentlyInDisplay + digit
+            }
         } else {
-            display.text = digit
+            if digit == floatingPoint {
+                display.text! = "0."
+            } else {
+                display.text = digit
+            }
             userIsInTheMiddleOfTyping = true
         }
     }
