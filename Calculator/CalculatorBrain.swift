@@ -16,7 +16,19 @@ func multiply(op1: Double, op2: Double) -> Double {
 // 2. Not live in heap, so copy values
 // 3. No Initializer is need.
 // 4. 'mutating' is need when you change var, because struct should be written before deliver it's value by copying.
-struct CalculatorBrain {
+struct CalculatorBrain: CustomStringConvertible {
+    
+    // protocol implementation for CustomStringConvertible
+    var description: String {
+        get {
+            if result != nil {
+                return String(describing: result)
+            } else {
+                return "NOTHING IN IT"
+            }
+        }
+    }
+    
     private var accumulator: Double?
     
     private enum Operation {
